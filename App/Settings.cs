@@ -8,7 +8,7 @@ namespace App
 {
     public static class Settings
     {
-        public static readonly string ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        public static readonly string ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя., ?";
         public static readonly int ALPHABET_LENGTH = ALPHABET.Length;
 
         public static Dictionary<char, double> PrimaryDict = new Dictionary<char, double>

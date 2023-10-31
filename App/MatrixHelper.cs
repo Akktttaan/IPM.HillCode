@@ -15,26 +15,26 @@ namespace App
 
             while (matrixDet < 0)
             {
-                matrixDet += 33;
+                matrixDet += Settings.ALPHABET_LENGTH;
             }
 
-            for (int i = 0; i < matrix.RowCount; i++)
+            for (var i = 0; i < matrix.RowCount; i++)
             {
-                for (int j = 0; j < matrix.ColumnCount; j++)
+                for (var j = 0; j < matrix.ColumnCount; j++)
                 {
                     var tempMatrix = matrix.RemoveRow(i).RemoveColumn(j);
                     var insertedValue = Math.Pow(-1, i + j) * tempMatrix.Determinant();
 
                     while (insertedValue < 0)
                     {
-                        insertedValue += 33;
+                        insertedValue += Settings.ALPHABET_LENGTH;
                     }
 
                     while (insertedValue % matrixDet != 0)
                     {
-                        insertedValue += 33;
+                        insertedValue += Settings.ALPHABET_LENGTH;
                     }
-                    outputMatrix.At(j, i, Math.Round(insertedValue / matrixDet) % 33);
+                    outputMatrix.At(j, i, Math.Round(insertedValue / matrixDet) % Settings.ALPHABET_LENGTH);
                 }
             }
             return (Matrix)outputMatrix;

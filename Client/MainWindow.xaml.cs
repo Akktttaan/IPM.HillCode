@@ -113,7 +113,7 @@ namespace Client
         {
             if (_inverseKeyMatrix != null)
             {
-                ConvertedText.Text = MergeEncryptAndOriginalStrings(HillEncoder.Encrypt(ConvertedText.Text, _inverseKeyMatrix), ConvertedText.Text);
+                ConvertedText.Text = MergeEncryptAndOriginalStrings(HillEncoder.Encrypt(InitialText.Text, _inverseKeyMatrix), InitialText.Text);
             }
         }
 
