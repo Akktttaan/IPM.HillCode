@@ -1,0 +1,113 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1280">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="35,232,0,0" TextWrapping="Wrap" AcceptsReturn="True"
+                 Text="" VerticalAlignment="Top" Width="590" Height="424" x:Name="InitialText" TextChanged="InitialTextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="660,232,0,0" TextWrapping="Wrap" 
+                 Text="" VerticalAlignment="Top" Width="590" Height="424" x:Name="ConvertedText" IsReadOnly="True"/>
+        <Button Content="Загрузить файл с текстом" HorizontalAlignment="Left" Margin="338,201,0,0" VerticalAlignment="Top" 
+                RenderTransformOrigin="-0.485,-0.059" Height="26" Width="208" Click="LoadTextFromFile" FontSize="15"/>
+        <Button Content="Сохранить текст в файл" HorizontalAlignment="Left" Margin="1000,201,0,0" VerticalAlignment="Top" 
+                RenderTransformOrigin="-0.485,-0.059" Height="26" Width="168" Click="SaveTextInFile" FontSize="15">
+        </Button>
+        <Button Content="Зашифровать" x:Name="EncryptButton" HorizontalAlignment="Left" Margin="200,201,0,0" VerticalAlignment="Top"
+                RenderTransformOrigin="-0.065,-0.357" Height="26" Width="133" FontSize="16" Click="Encrypt" IsEnabled="false"/>
+        <Button Content="Расшифровать" x:Name="DecryptButton" HorizontalAlignment="Left" Margin="863,201,0,0" VerticalAlignment="Top"
+                RenderTransformOrigin="-0.065,-0.357" Height="26" Width="132" FontSize="16" Click="Decrypt" IsEnabled="false"/>
+        <Label Content="Исходный текст:" HorizontalAlignment="Left" Margin="35,201,0,0" VerticalAlignment="Top" Width="203" FontSize="15"/>
+        <Label Content="Преобразованный текст:" HorizontalAlignment="Left" Margin="660,201,0,0" VerticalAlignment="Top" Width="203" FontSize="15"/>
+        <Button Content="        Показать&#xD;&#xA;частотный словарь" HorizontalAlignment="Left"
+                Margin="908,48,0,0" VerticalAlignment="Top" Height="42" Width="158" FontSize="15" Click="ShowFrequencyDictionary"/>
+        <Button x:Name="CopyInitialText" Content="Copy" HorizontalAlignment="Left" Margin="575,201,0,0" VerticalAlignment="Top" Height="26" Width="50" FontSize="15" Click="CopyInitialText_Click"/>
+        <Button x:Name="CopyConvertedText" Content="Copy" HorizontalAlignment="Left" Margin="1200,201,0,0" VerticalAlignment="Top" Height="26" Width="50" FontSize="15" Click="CopyConvertedText_Click"/>
+        <Button x:Name="ShowGraphics" Content="Показать графики" HorizontalAlignment="Left" Margin="1084,48,0,0" VerticalAlignment="Top" Height="42" Width="166" FontSize="15" Click="ShowGraphics_Click"/>
+        <Label Content="Выберите размерность матрицы:&#xD;&#xA;" HorizontalAlignment="Left" Margin="31,25,0,0"
+               VerticalAlignment="Top" Width="223" Height="26" FontSize="14"/>
+        <Button Content="Автогенерация ключа" HorizontalAlignment="Left" Margin="35,83,0,0" 
+                VerticalAlignment="Top" Width="203" Click="AutoGenerationBtn_Click" FontSize="14" IsEnabled="False" x:Name="AutoGenerationBtn"/>
+        <Button Content="Вычислить матрицу ключа" HorizontalAlignment="Left" Margin="35,111,0,0" 
+                VerticalAlignment="Top" Width="203" Click="GuessMatrixOfKey_Click" FontSize="14"/>
+        <Label Content="Матрица ключа" HorizontalAlignment="Left" Margin="346,16,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Label Content="Обратная матрица" HorizontalAlignment="Left" Margin="674,16,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Button Content="&gt;" HorizontalAlignment="Left" Margin="561,75,0,0" VerticalAlignment="Top" Width="27" Height="94" Click="FindInverseMatrix_Click"/>
+        <ComboBox x:Name="MatrixDimension" SelectionChanged="MatrixDimensionChanged" HorizontalAlignment="Left" Margin="35,56,0,0" VerticalAlignment="Top" Width="203"/>
+        <TextBox x:Name="matrix00" HorizontalAlignment="Left" Margin="270,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix01" HorizontalAlignment="Left" Margin="316,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix02" HorizontalAlignment="Left" Margin="362,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix03" HorizontalAlignment="Left" Margin="408,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix04" HorizontalAlignment="Left" Margin="454,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix10" HorizontalAlignment="Left" Margin="270,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix11" HorizontalAlignment="Left" Margin="316,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix12" HorizontalAlignment="Left" Margin="362,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix13" HorizontalAlignment="Left" Margin="408,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix14" HorizontalAlignment="Left" Margin="454,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix20" HorizontalAlignment="Left" Margin="270,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix21" HorizontalAlignment="Left" Margin="316,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix22" HorizontalAlignment="Left" Margin="362,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix23" HorizontalAlignment="Left" Margin="408,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix24" HorizontalAlignment="Left" Margin="454,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix30" HorizontalAlignment="Left" Margin="270,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix31" HorizontalAlignment="Left" Margin="316,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix32" HorizontalAlignment="Left" Margin="362,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix33" HorizontalAlignment="Left" Margin="408,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix34" HorizontalAlignment="Left" Margin="454,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix40" HorizontalAlignment="Left" Margin="270,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix41" HorizontalAlignment="Left" Margin="316,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix42" HorizontalAlignment="Left" Margin="362,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix43" HorizontalAlignment="Left" Margin="408,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix44" HorizontalAlignment="Left" Margin="454,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix05" HorizontalAlignment="Left" Margin="500,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix15" HorizontalAlignment="Left" Margin="500,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix25" HorizontalAlignment="Left" Margin="500,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix35" HorizontalAlignment="Left" Margin="500,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix45" HorizontalAlignment="Left" Margin="500,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix50" HorizontalAlignment="Left" Margin="270,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix51" HorizontalAlignment="Left" Margin="316,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix52" HorizontalAlignment="Left" Margin="362,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix53" HorizontalAlignment="Left" Margin="408,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix54" HorizontalAlignment="Left" Margin="454,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="matrix55" HorizontalAlignment="Left" Margin="500,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse00" HorizontalAlignment="Left" Margin="608,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse01" HorizontalAlignment="Left" Margin="654,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse02" HorizontalAlignment="Left" Margin="700,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse03" HorizontalAlignment="Left" Margin="746,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse04" HorizontalAlignment="Left" Margin="792,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse10" HorizontalAlignment="Left" Margin="608,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse11" HorizontalAlignment="Left" Margin="654,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse12" HorizontalAlignment="Left" Margin="700,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse13" HorizontalAlignment="Left" Margin="746,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse14" HorizontalAlignment="Left" Margin="792,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse20" HorizontalAlignment="Left" Margin="608,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse21" HorizontalAlignment="Left" Margin="654,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse22" HorizontalAlignment="Left" Margin="700,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse23" HorizontalAlignment="Left" Margin="746,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse24" HorizontalAlignment="Left" Margin="792,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse30" HorizontalAlignment="Left" Margin="608,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse31" HorizontalAlignment="Left" Margin="654,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse32" HorizontalAlignment="Left" Margin="700,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse33" HorizontalAlignment="Left" Margin="746,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse34" HorizontalAlignment="Left" Margin="792,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse40" HorizontalAlignment="Left" Margin="608,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse41" HorizontalAlignment="Left" Margin="654,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse42" HorizontalAlignment="Left" Margin="700,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse43" HorizontalAlignment="Left" Margin="746,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse44" HorizontalAlignment="Left" Margin="792,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse05" HorizontalAlignment="Left" Margin="838,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse15" HorizontalAlignment="Left" Margin="838,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse25" HorizontalAlignment="Left" Margin="838,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse35" HorizontalAlignment="Left" Margin="838,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse45" HorizontalAlignment="Left" Margin="838,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse50" HorizontalAlignment="Left" Margin="608,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse51" HorizontalAlignment="Left" Margin="654,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse52" HorizontalAlignment="Left" Margin="700,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse53" HorizontalAlignment="Left" Margin="746,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse54" HorizontalAlignment="Left" Margin="792,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+        <TextBox x:Name="inverse55" HorizontalAlignment="Left" Margin="838,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="41" Height="19" IsEnabled="False"/>
+    </Grid>
+</Window>
